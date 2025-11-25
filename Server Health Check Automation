@@ -1,0 +1,9 @@
+import psutil
+import os
+
+print("CPU:", psutil.cpu_percent())
+print("RAM:", psutil.virtual_memory().percent)
+
+service = "Spooler"
+result = os.popen(f'sc query "{service}"').read()
+print("Service Running" if "RUNNING" in result else "Service Stopped")
