@@ -1,0 +1,4 @@
+import os
+
+os.system('powershell "Get-ADUser -Filter * | Select Name,Enabled | Export-Csv ad_users.csv"')
+print("AD report generated.")
