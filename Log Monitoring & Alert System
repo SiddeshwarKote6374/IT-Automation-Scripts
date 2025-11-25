@@ -1,0 +1,11 @@
+import smtplib
+
+with open("server.log") as f:
+    for line in f:
+        if "error" in line.lower():
+            server = smtplib.SMTP("smtp.office365.com", 587)
+            server.starttls()
+            server.login("your@mail.com", "Password123")
+            server.sendmail("your@mail.com", "admin@mail.com", "Error detected:\n" + line)
+            server.quit()
+            print("Alert sent!")
