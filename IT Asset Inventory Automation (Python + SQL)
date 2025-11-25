@@ -1,0 +1,23 @@
+import csv
+import mysql.connector
+
+db = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="",
+    database="it_assets"
+)
+
+cursor = db.cursor()
+
+with open("assets.csv") as file:
+    reader = csv.DictReader(file)
+
+    for row in reader:
+        cursor.execute("""
+        INSERT INTO assets (hostname, user, os, status)
+        VALUES (%s, %s, %s, %s)
+        """, (row['hostname'], row['user'], row['os'], row['status']))
+
+db.commit()
+print("Assets updated successfully.")
