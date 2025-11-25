@@ -1,0 +1,8 @@
+import os
+import csv
+
+with open("newusers.csv") as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        cmd = f'powershell "New-ADUser -Name {row["name"]} -SamAccountName {row["sam"]} -AccountPassword (ConvertTo-SecureString {row["pwd"]} -AsPlainText -Force) -Enabled $true"'
+        os.system(cmd)
