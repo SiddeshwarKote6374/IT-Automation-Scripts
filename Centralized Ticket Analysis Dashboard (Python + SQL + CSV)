@@ -1,0 +1,16 @@
+import pandas as pd
+import mysql.connector
+
+df = pd.read_csv("tickets.csv")
+
+db = mysql.connector.connect(host="localhost", user="root", password="", database="itsm")
+cursor = db.cursor()
+
+for i,row in df.iterrows():
+    cursor.execute("""
+    INSERT INTO tickets (id, category, priority, status)
+    VALUES (%s, %s, %s, %s)
+    """, (row.id, row.category, row.priority, row.status))
+
+db.commit()
+print("Tickets imported.")
