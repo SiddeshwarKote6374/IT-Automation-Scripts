@@ -1,0 +1,7 @@
+import shutil
+
+
+usage = shutil.disk_usage("C:/")
+print(f"Total: {usage.total/1e9:.2f} GB")
+print(f"Used: {usage.used/1e9:.2f} GB")
+print(f"Free: {usage.free/1e9:.2f} GB")
