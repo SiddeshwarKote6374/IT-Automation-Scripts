@@ -1,0 +1,11 @@
+import socket
+
+targets = [("google.com", 443), ("example.com", 80)]
+
+for host, port in targets:
+    s = socket.socket()
+    try:
+        s.connect((host, port))
+        print(f"{host}:{port} OPEN")
+    except:
+        print(f"{host}:{port} CLOSED")
